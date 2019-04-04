@@ -44,6 +44,8 @@ void coordinate::print()
 {
 	cout << "(" << x << "," << y << ")" << endl;
 }
+
+
 coordinate::~coordinate()
 {
 }

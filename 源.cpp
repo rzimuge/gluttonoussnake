@@ -1,110 +1,36 @@
 #include"base.h"
-bool judge();
+
 using namespace std;
-char i, p;
-coordinate t(rand() % 100, rand() % 50);
-GluttonousSnake q;
-snake *e = &q;
+
+ char i, p, Temp;
+ bool y = true;
+ int sop = 12, M = 0, N = 0;
+ coordinate t[sot];
+ GluttonousSnake q;
+ snake *e = &q;
+
 int main()
 {
-	bool y = true;
-	gotoxy(50, 25);
-	cout << "è¾“å…¥Yæ¥å¼€å§‹:" << endl;
-	gotoxy(50, 26);
-	cout << "æŒ‰Pæš‚åœ" << endl;
-	gotoxy(62, 25);
-	cin >> p;
-	if (p== 'Y')
+	srand(time(NULL));
+	for (int I = 0; I < sot; I++)
 	{
-		system("cls");
-		while (y==true)
-		{
-			gotoxy(101, 50);
-			wall(101, 50);
-			Show(t);
-			gotoxy(101, 50);
-			q.move(i);
-			ShowGluttonousSnake(q);
-			Sleep(250);
-			if (_kbhit())
-			{
-				char m;
-				m = _getch();
-				switch (m)//æŒç»­ç§»åŠ¨(PS:å› ä¸ºä½¿ç”¨gentche/getche å¾—åˆ°çš„å­—ç¬¦æ˜¯åŠ¨æ€çš„ä½¿ç”¨ä¸€æ¬¡å°±æ¸…ç©º)
-				{
-				case 'w':
-					i = 'w';
-					break;
-				case 's':
-					i = 's';
-					break;
-				case 'a':
-					i = 'a';
-					break;
-				case 'd':
-					i = 'd';
-					break;
-				case 'p':
-					gotoxy(101, 50);
-					cout << endl;
-					system("PAUSE");
-					break;
-				}
-			}
-
-			if (q.getsp(e->getl() - 1).getx() == t.getx() && q.getsp(e->getl() - 1).gety() == t.gety())
-			{
-				q.Gluttonous(t);
-				t.setx(rand() % 99);
-				t.sety(rand() % 48);
-				q.eatmove(i);
-			}
-			y=judge();
-			system("cls");
-		}
+		t[I].setx(rand() % 97);
+		t[I].sety(rand() % 47);
 	}
-	system("cls");
-	gotoxy(L/2, H/2);
-	cout << "You are lost!"<< endl;
+	gotoxy(50, 25);
+	cout << "ÊäÈëYÀ´¿ªÊ¼(ÊäÈëeÍË³ö):" << endl;
+	gotoxy(50, 26);
+	cout << "°´PÔİÍ£" << endl;
+	gotoxy(50, 27);
+	cout << "°´rÖØÖÃ" << endl;
+	gotoxy(50, 28);
+	cout << "ÇëÉèÖÃÊ³ÎïÊıÁ¿(×î´ó15):";
+	cin >> sop;
+	gotoxy(76, 25);
+	cin >> p;
+	thread lo(run, p), g(Get);
+	g.detach();
+	lo.join();
 	return 0;
 }
 
-bool  judge()//boolæœªè¯´æ˜è¿”å›çœŸå‡æ—¶,é»˜è®¤è¿”å›50
-{
-	for (unsigned i = 0; i < L; i++)//ä¸Šè¡Œ
-	{
-		if (q.getsp(e->getl() - 1).getx() == i && q.getsp(e->getl() - 1).gety() == 1)
-		{
-			return false;
-		}
-	}
-	for (unsigned i = 1; i < H; i++)//å·¦åˆ—
-	{
-		if (q.getsp(e->getl() - 1).getx() == 1 && q.getsp(e->getl() - 1).gety() == i)
-		{
-			return false;
-		}
-	}
-	for (unsigned i = 1; i < L; i++)//ä¸‹è¡Œ
-	{
-		if (q.getsp(e->getl() - 1).getx() == i && q.getsp(e->getl() - 1).gety() == H)
-		{
-			return false;
-		}
-	}
-	for (unsigned i = 0; i < H; i++)//å³åˆ—
-	{
-		if (q.getsp(e->getl() - 1).getx() == L && q.getsp(e->getl() - 1).gety() == i)
-		{
-			return false;
-		}
-	}
-	for (unsigned i = 0; i < e->getl()-1; i++)//è›‡èº«ç›¸å’¬
-	{
-		if (q.getsp(e->getl() - 1).getx() == q.getsp(i).getx() && q.getsp(e->getl() - 1).gety() == q.getsp(i).gety())
-		{
-			return false;
-		}
-	}
-	return true;
-}

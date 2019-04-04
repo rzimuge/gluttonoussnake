@@ -10,7 +10,7 @@ public:
 	unsigned getx();
 	void sety(unsigned i);
 	unsigned gety();
-	void addx();//åæ ‡æ”¹å˜
+	void addx();//×ø±ê¸Ä±ä
 	void reducex();
 	void addy();
 	void reducey();
@@ -18,5 +18,4 @@ public:
 	~coordinate();
 private:
 	unsigned x, y;
-
 };

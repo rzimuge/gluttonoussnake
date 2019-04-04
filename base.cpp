@@ -1,4 +1,5 @@
 #include "base.h"
+
 void gotoxy(int x, int y)
 {
 	COORD pos;
@@ -7,13 +8,24 @@ void gotoxy(int x, int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
-void Show(coordinate m)//æ‰“å°ç‚¹
+void Show(coordinate m)//´òÓ¡µã
 {
 	gotoxy(m.getx(), m.gety());
 	cout << "O";
 }
-
-void ShowGluttonousSnake(GluttonousSnake m)//æ‰“å°è›‡
+void clear(coordinate m)//Çå³şµã
+{
+	gotoxy(m.getx(), m.gety());
+	cout << ' ';
+}
+void clearGluttonousSnake(GluttonousSnake m)//Çå³ıÉß
+{
+	for (int i = m.getl() - 1; i >= 0; i--)
+	{
+		clear(m.getsp(i));
+	}
+}
+void ShowGluttonousSnake(GluttonousSnake m)//´òÓ¡Éß
 {
 	for (int i = m.getl()-1; i >=0 ; i--)
 	{
@@ -21,28 +33,194 @@ void ShowGluttonousSnake(GluttonousSnake m)//æ‰“å°è›‡
 	}
 }
 
-void wall(int li, int h)//åˆå§‹åŒ–å¢™å£
+
+void showWall(int x,int y,int ll,int hh)
 {
-	for (int i = 0; i < li; i++)//ä¸Šè¡Œ
+
+	if (y == 1||y==hh)
 	{
-		gotoxy(i, 1);
-		cout << "+";
+		gotoxy(x, y);
+		cout << "_";
 	}
-	for (int i = 1; i < h; i++)//å·¦åˆ—
+	else
 	{
-		gotoxy(1, i);
-		cout << "+";
+		gotoxy(x, y);
+		cout << "|";
 	}
-	for (int i = 1; i < li; i++)//ä¸‹è¡Œ
-	{
-		gotoxy(i, h);
-		cout << "+";
-	}
-	for (int i = 0; i < h; i++)//å³åˆ—
-	{
-		gotoxy(li, i);
-		cout << "+";
-	}
+
+}
+
+void wall(int li, int h)//³õÊ¼»¯Ç½±Ú
+{
+		for (int i = 0; i < li; i++)//ÉÏĞĞ
+		{
+			showWall(i, 1,li,h);
+		}
+		for (int i = 1; i < h; i++)//×óÁĞ
+		{
+			showWall(1, i, li, h);
+		}
+		for (int i = 1; i < li; i++)//ÏÂĞĞ
+		{
+			showWall(i, h, li, h);
+		}
+		for (int i = 0; i < h; i++)//ÓÒÁĞ
+		{
+			showWall(li, i, li, h);
+		}
 }
 
 
+void Get()
+{
+	while (1)
+	{
+		if (_kbhit())
+		{
+			char m;
+			m = _getch();
+			switch (m)//³ÖĞøÒÆ¶¯(PS:ÒòÎªÊ¹ÓÃgentche/getche µÃµ½µÄ×Ö·ûÊÇ¶¯Ì¬µÄÊ¹ÓÃÒ»´Î¾ÍÇå¿Õ)
+			{
+			case 'w':
+				M = e->getsp(e->getl() - 1).gety();
+				N = e->getsp(e->getl() - 2).gety();
+				if (M - N > 0) {}//´ËÅĞ¶¨ÎªÏŞÖÆÉßÍù»ØÅÜ
+				else
+				{
+					i = 'w';
+				}
+				break;
+			case 's':
+				M = e->getsp(e->getl() - 1).gety();
+				N = e->getsp(e->getl() - 2).gety();
+				if (M - N < 0) {}//´ËÅĞ¶¨ÎªÏŞÖÆÉßÍù»ØÅÜ
+				else
+				{
+					i = 's';
+				}
+				break;
+			case 'a':
+				M = e->getsp(e->getl() - 1).getx();
+				N = e->getsp(e->getl() - 2).getx();
+				if (M - N > 0) {}//´ËÅĞ¶¨ÎªÏŞÖÆÉßÍù»ØÅÜ
+				else
+				{
+					i = 'a';
+				}
+				break;
+			case 'd':
+				M = e->getsp(e->getl() - 1).getx();
+				N = e->getsp(e->getl() - 2).getx();
+				if (M - N < 0) {}//´ËÅĞ¶¨ÎªÏŞÖÆÉßÍù»ØÅÜ
+				else
+				{
+					i = 'd';
+				}
+				break;
+			case 'r':
+				clearGluttonousSnake(q);
+				q.reset();
+				i = 'p';
+				break;
+			case 'p':
+				Temp = i;
+				i = 'p';
+				
+				break;
+			}
+		}
+	}
+}
+
+void run(char p)
+{
+	if (p == 'Y')
+	{
+		system("cls");
+		q.reset();
+		wall(L, H);
+
+		while (y == true)
+		{
+			if (i == 'p')
+			{
+				system("PAUSE");
+				i = Temp;
+				system("cls");
+				wall(L, H);
+				continue;
+			}
+			for (int I = 0; I < sop; I++)
+			{
+				clear(t[I]);
+				Show(t[I]);
+			}
+			clearGluttonousSnake(q);
+			q.move(i);
+			ShowGluttonousSnake(q);
+			Sleep(250);
+			for (int I = 0; I < sop; I++)
+			{
+				if (q.getsp(e->getl() - 1).getx() == t[I].getx() && q.getsp(e->getl() - 1).gety() == t[I].gety())//Éß³Ôµ½Ê³Îï
+				{
+					srand(time(NULL));
+					clear(t[I]);
+					q.Gluttonous(t[I]);
+					t[I].setx(rand() % 97);
+					t[I].sety(rand() % 47);
+					q.eatmove(i);
+				}
+			}
+			y = judge();
+		}
+	}
+	else
+	{
+		if (p == 'e')
+			return;
+	}
+	system("cls");
+	gotoxy(L / 2, H / 2);
+	cout << "You are lost!" << endl;
+	gotoxy(L / 2, H / 2 + 1);
+	system("PAUSE");
+}
+bool  judge()//boolÎ´ËµÃ÷·µ»ØÕæ¼ÙÊ±,Ä¬ÈÏ·µ»Ø50
+{
+	for (unsigned i = 0; i < L; i++)//ÉÏĞĞ
+	{
+		if (q.getsp(e->getl() - 1).getx() == i && q.getsp(e->getl() - 1).gety() == 1)
+		{
+			return false;
+		}
+	}
+	for (unsigned i = 1; i < H; i++)//×óÁĞ
+	{
+		if (q.getsp(e->getl() - 1).getx() == 1 && q.getsp(e->getl() - 1).gety() == i)
+		{
+			return false;
+		}
+	}
+	for (unsigned i = 1; i < L; i++)//ÏÂĞĞ
+	{
+		if (q.getsp(e->getl() - 1).getx() == i && q.getsp(e->getl() - 1).gety() == H)
+		{
+			return false;
+		}
+	}
+	for (unsigned i = 0; i < H; i++)//ÓÒÁĞ
+	{
+		if (q.getsp(e->getl() - 1).getx() == L && q.getsp(e->getl() - 1).gety() == i)
+		{
+			return false;
+		}
+	}
+	for (unsigned i = 0; i < e->getl() - 1; i++)//ÉßÉíÏàÒ§
+	{
+		if (q.getsp(e->getl() - 1).getx() == q.getsp(i).getx() && q.getsp(e->getl() - 1).gety() == q.getsp(i).gety())
+		{
+			return false;
+		}
+	}
+	return true;
+}

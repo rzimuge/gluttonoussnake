@@ -14,23 +14,24 @@ int GluttonousSnake::Gluttonous(coordinate m)
 
 void GluttonousSnake::move(char m)
 {
+	int M = 0, N = 0;
 	switch (m)
 	{
 	case 'w':
-		body();
-		sp[l-1].reducey();
+			body();
+			sp[l - 1].reducey();
 		break;
 	case 's':
-		body();
-		sp[l - 1].addy();
+			body();
+			sp[l - 1].addy();
 		break;
 	case 'a':
-		body();
-		sp[l - 1].reducex();
+			body();
+			sp[l - 1].reducex();
 		break;
 	case 'd':
-		body();
-		sp[l - 1].addx();
+			body();
+			sp[l - 1].addx();
 		break;
 	default:
 		break;

@@ -8,10 +8,10 @@ class GluttonousSnake
 :public snake
 {
 public:
-	GluttonousSnake();//åˆå§‹åŒ–
-	int Gluttonous(coordinate m);//è›‡åŠ é•¿
-	void move(char m);//è›‡ç§»åŠ¨
-	void eatmove(char m);//è›‡åƒé¥­æ—¶ç§»åŠ¨
+	GluttonousSnake();//³õÊ¼»¯
+	int Gluttonous(coordinate m);//Éß¼Ó³¤
+	void move(char m);//ÉßÒÆ¶¯
+	void eatmove(char m);//Éß³Ô·¹Ê±ÒÆ¶¯
 	~GluttonousSnake();
 };
 

@@ -26,6 +26,16 @@ void snake::body()
 	}
 }
 
+void snake::reset()
+{
+	l = 2;
+	sp.resize(2);
+	sp[0].setx(2);
+	sp[0].sety(2);
+	sp[1].setx(3);
+	sp[1].sety(2);
+}
+
 coordinate snake::getsp(int i)
 {
 	return sp[i];

@@ -6,9 +6,10 @@ class snake
 {
 public:
 	snake();
-	void setl(int i);//è›‡åŠ é•¿
-	void setsp(coordinate i);//è›‡åŠ é•¿
-	void body();//è›‡èº«ç§»åŠ¨
+	void setl(int i);//Éß¼Ó³¤
+	void setsp(coordinate i);//Éß¼Ó³¤
+	void body();//ÉßÉíÒÆ¶¯
+	void reset();//ÖØÖÃ
 	coordinate getsp(int i);
 	int getl();
 	~snake();
